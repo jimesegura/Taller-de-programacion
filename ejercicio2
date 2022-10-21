@@ -12,11 +12,11 @@ procesos
     Informar(cantF)
   fin
 areas 
-  area1: AreaP(10,11,10,29)
+  area1: AreaP(10,11,10,29)          {son las calles que tienen que recorrer sin contar las esquinas porque las compaten, hay que declararlas como privadas}
   area2: AreaP(11,30,29,30)
   area3: AreaP(30,11,30,29)
   area4: AreaP(11,10,29,10)
-  esquina1: AreaPC(10,10,10,10)
+  esquina1: AreaPC(10,10,10,10)      {estas son areas parcialmente compartidas, son las esquinas}
   esquina2: AreaPC(10,30,10,30)
   esquina3: AreaPC(30,30,30,30)
   esquina4: AreaPC(30,10,30,10)
