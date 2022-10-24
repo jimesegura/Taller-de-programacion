@@ -1,0 +1,127 @@
+programa ejercicio3
+procesos
+{_______________________________________________________________________}
+  proceso trabajarFlores(ES cantF:numero)
+  comenzar
+    mientras HayFlorEnLaEsquina 
+      tomarFlor
+      cantF:=cantF+1
+    mientras HayFlorEnLaBolsa
+      depositarFlor 
+  fin
+{______________________________________________________________________}
+  proceso trabajarPapeles(ES cantP:numero)
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      cantP:=cantP+1
+    mientras HayPapelEnLaBolsa
+      depositarPapel
+  fin
+{______________________________________________________________________}
+  proceso escaleras(E escalon: numero; E long: numero; ES supero:numero)
+  variables
+    cantF:numero
+    cantP:numero
+    supero:numero
+  comenzar
+    cantF:=0
+    cantP:=0
+    repetir escalon
+      trabajarFlores(cantF)
+      trabajarPapeles(cantP)
+      mover
+    derecha
+    repetir long
+      trabajarFlores(cantF)
+      trabajarPapeles(cantP)
+      mover
+    repetir 3
+      derecha
+    si (cantF+1)= cantP 
+      supero:=supero+1
+  fin
+{______________________________________________________________________}
+  proceso recorrerEscalon
+  variables
+    escalon:numero
+    long: numero
+    supero:numero
+  comenzar
+    supero:=0
+    escalon:=1
+    long:=1
+    repetir 4
+      escaleras(escalon,long,supero)
+      escalon:=escalon+1
+      long:=long+1
+    Informar('La-cantidad-de-esquinas-en-las-que-los-papeles-superan-en-uno-a-las-flores-es-',supero)
+  fin
+{______________________________________________________________________}
+areas
+  {escalera1}
+  e1: AreaP(12,14,12,15)
+  e2: AreaP(13,15,13,17)
+  e3:AreaP(14,17,15,17)
+  e4:AreaP(15,18,15,20)
+  e5:AreaP(16,20,17,20)
+  e6:AreaP(18,20,18,23)
+  e7:AreaP(18,24,22,24)
+  {escalera2}
+  e11:AreaP(17,10,17,11)
+  e22:AreaP(18,11,18,13)
+  e33:AreaP(19,13,20,13)
+  e44:AreaP(20,14,20,16)
+  e55:AreaP(21,16,22,16)
+  e66:AreaP(23,16,23,19)
+  e77:AreaP(23,20,27,20)
+  {escalera3}
+  e111:AreaP(22,6,22,7)
+  e222:AreaP(23,7,23,9)
+  e333:AreaP(24,9,25,9)
+  e444:AreaP(25,10,25,12)
+  e555:AreaP(26,12,27,12)
+  e666:AreaP(28,12,28,15)
+  e777:AreaP(28,16,32,16)
+{____________________________________________________________}
+robots
+  robot robot1
+  comenzar
+    recorrerEscalon
+  fin
+{_____________________________________________________________}
+variables
+  r1:robot1
+  r2:robot1
+  r3:robot1
+{______________________________________________________________}
+comenzar 
+  {r1}
+  AsignarArea(r1,e1)
+  AsignarArea(r1,e2)
+  AsignarArea(r1,e3)
+  AsignarArea(r1,e4)
+  AsignarArea(r1,e5)
+  AsignarArea(r1,e6)
+  AsignarArea(r1,e7)
+  {r2}
+  AsignarArea(r2,e11)
+  AsignarArea(r2,e22)
+  AsignarArea(r2,e33)
+  AsignarArea(r2,e44)
+  AsignarArea(r2,e55)
+  AsignarArea(r2,e66)
+  AsignarArea(r2,e77)
+  {r3}
+  AsignarArea(r3,e111)
+  AsignarArea(r3,e222)
+  AsignarArea(r3,e333)
+  AsignarArea(r3,e444)
+  AsignarArea(r3,e555)
+  AsignarArea(r3,e666)
+  AsignarArea(r3,e777)
+
+  Iniciar(r1,12,14)
+  Iniciar(r2,17,10)
+  Iniciar(r3,22,6)
+fin
