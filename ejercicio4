@@ -23,6 +23,7 @@ procesos
       flores
       avenida:=avenida+1
       Pos(avenida,1)
+    flores
   fin
   proceso limpiarPapeles
   variables
@@ -36,6 +37,7 @@ procesos
       papeles
       avenida:=avenida+1
       Pos(avenida,1)
+    papeles
   fin
 {__________________________________________________}
 areas
