@@ -4,11 +4,14 @@ procesos
   variables
     cantF:numero
   comenzar
-    repetir 20
+    repetir 19
       mientras HayFlorEnLaEsquina
         tomarFlor
         cantF:=cantF+1
       mover
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      cantF:=cantF+1
     Informar(cantF)
   fin
 areas 
@@ -23,34 +26,24 @@ areas
 robots 
   robot robot1
   comenzar
-    juntarFlores
-  fin
-  {___________________________________}
-  robot robot2
-  comenzar
-    derecha
-    juntarFlores
-  fin
-  {___________________________________}
-  robot robot3
-  comenzar
-    repetir 2
+    si (PosAv=10)& (PosCa=30)
       derecha
-    juntarFlores
-  fin 
-  {___________________________________}
-  robot robot4
-  comenzar
-    repetir 3
+    si (PosAv=30)&(PosCa=30)
       derecha
-    juntarFlores
+      derecha
+    si (PosAv=30)&(PosCa=10)
+      derecha
+      derecha
+      derecha
+    repetir 4
+      juntarFlores
   fin
   {_____________________________________}
 variables 
   r1:robot1
-  r2:robot2
-  r3:robot3
-  r4:robot4
+  r2:robot1
+  r3:robot1
+  r4:robot1
 comenzar
   AsignarArea(r1,area1)
   AsignarArea(r1,esquina1)
@@ -73,3 +66,4 @@ comenzar
   Iniciar(r3,30,30)
   Iniciar(r4,30,10)
 fin
+
