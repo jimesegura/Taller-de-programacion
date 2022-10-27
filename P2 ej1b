@@ -1,0 +1,55 @@
+programa ej1
+procesos 
+  proceso juntarFlores(ES cantF:numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      cantF:=cantF+1
+  fin
+areas
+  area1:AreaP(1,1,1,10)
+  area2:AreaP(2,11,2,20)
+  area3:AreaP(2,1,2,1)
+robots
+  robot robot1
+  variables
+    cantFP:numero
+  comenzar
+    cantFP:=0
+    repetir 9
+      juntarFlores(cantFP)
+      mover
+    juntarFlores(cantFP)
+    EnviarMensaje(cantFP,r3)
+  fin
+  robot robot2
+  variables
+    cantr1:numero
+    cantr2:numero
+    dif:numero
+  comenzar
+    dif:=0
+    RecibirMensaje(cantr1,*)
+    Informar(cantr1)
+    RecibirMensaje(cantr2,*)
+    Informar(cantr2)
+    
+    si (cantr1 > cantr2) 
+      dif:= (cantr1 - cantr2)
+    sino
+      dif:= (cantr2 - cantr1)
+      
+    Informar(dif)
+  fin
+variables
+  r1:robot1
+  r2:robot1
+  r3:robot2
+comenzar
+  AsignarArea(r1,area1)
+  AsignarArea(r2,area2)
+  AsignarArea(r3,area3)
+  Iniciar(r1,1,1)
+  Iniciar(r2,2,11)
+  Iniciar(r3,2,1)
+fin
