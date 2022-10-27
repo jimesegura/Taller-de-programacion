@@ -1,0 +1,79 @@
+programa ej2
+procesos
+  proceso juntarFlores(ES cantF:numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      cantF:=cantF+1
+  fin
+  proceso juntarPapeles(ES cantP:numero)
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      cantP:=cantP+1
+  fin
+  proceso escalera( ES cantMasF:numero; ES alto:numero)
+  variables
+    cantF:numero
+    cantP:numero
+  comenzar
+    cantF:=0
+    cantP:=0
+    repetir alto
+      juntarFlores(cantF)
+      juntarPapeles(cantP)
+      mover
+    derecha
+    juntarFlores(cantF)
+    juntarPapeles(cantP)
+    mover
+    juntarFlores(cantF)
+    juntarPapeles(cantP)
+    si (cantF > cantP)
+      cantMasF:=cantMasF+1
+    repetir 3
+      derecha
+  fin
+areas
+  area1:AreaP(2,1,6,21)
+  area2:AreaP(7,1,11,21)
+  area3:AreaP(12,1,16,21)
+  area4:AreaP(1,1,1,1)
+robots 
+  robot robot1
+  variables
+    cantMasF:numero
+    alto:numero
+  comenzar
+    repetir 4
+      Random(alto,1,5)
+      escalera(cantMasF,alto)
+    EnviarMensaje(cantMasF,r4)
+  fin 
+  robot robot2
+  variables
+    cantE:numero
+    cantTotal:numero
+  comenzar
+    cantTotal:=0
+    repetir 3
+      RecibirMensaje(cantE,*)
+      cantTotal:=cantTotal+cantE
+    Informar('suma',cantTotal)
+  fin
+variables
+  r1:robot1
+  r2:robot1
+  r3:robot1
+  r4:robot2
+comenzar
+  AsignarArea(r1,area1)
+  AsignarArea(r2,area2)
+  AsignarArea(r3,area3)
+  AsignarArea(r4,area4)
+  
+  Iniciar(r1,2,1)
+  Iniciar(r2,7,1)
+  Iniciar(r3,12,1)
+  Iniciar(r4,1,1)  
+fin
