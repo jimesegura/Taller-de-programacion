@@ -1,0 +1,74 @@
+programa ej3
+procesos
+  proceso juntarPapeles(ES cantP:numero)
+  comenzar
+    repetir 9
+      mientras HayPapelEnLaEsquina
+        tomarPapel
+        cantP:=cantP+1
+      mover
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      cantP:=cantP+1
+  fin  
+{_________________________________________}
+  proceso juntarFlores(ES cantF:numero)
+  comenzar
+    repetir 9
+      mientras HayFlorEnLaEsquina
+        tomarFlor
+        cantF:=cantF+1
+      mover
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      cantF:=cantF+1     
+  fin
+areas
+  area1:AreaP(1,1,10,1)
+  area2:AreaP(11,1,20,1)
+  area3:AreaP(1,5,10,5)
+  area4:AreaP(11,5,20,5)
+robots
+  robot tipo1
+  variables
+    cantF:numero
+    cantP:numero
+  comenzar
+    derecha
+    si PosCa=1
+      juntarPapeles(cantP)
+      EnviarMensaje(cantP,r2a)
+    si PosCa=5
+      juntarFlores(cantF)
+      EnviarMensaje(cantF,r2b)
+  fin
+  robot tipo2
+  variables
+    cantF:numero
+    cantP:numero
+  comenzar
+    derecha
+    si PosCa=1
+      RecibirMensaje(cantP,r1a)
+      juntarPapeles(cantP)
+      Informar(cantP)
+    si PosCa=5
+      RecibirMensaje(cantF,r1b)
+      juntarFlores(cantF)
+      Informar(cantF)
+  fin
+variables
+  r1a:tipo1
+  r2a:tipo2
+  r1b:tipo1
+  r2b:tipo2
+comenzar
+  AsignarArea(r1a,area1)
+  AsignarArea(r2a,area2)
+  AsignarArea(r1b,area3)
+  AsignarArea(r2b,area4)
+  Iniciar(r1a,1,1)
+  Iniciar(r2a,11,1)
+  Iniciar(r1b,1,5)
+  Iniciar(r2b,11,5)
+fin
