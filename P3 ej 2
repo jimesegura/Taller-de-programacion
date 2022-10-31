@@ -1,0 +1,157 @@
+programa ej2
+procesos
+  proceso juntarFlores(ES antF:numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      cantF:=cantF+1
+  fin
+  proceso juntaPapeles(ES cantP:numero)
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      cantP:=cantP+1
+  fin
+  proceso escaleraDerecha(ES alto:numero; ES ancho:numero; ES cantF:numero)
+  comenzar
+    repetir 4
+      repetir alto
+        mover
+      alto:=alto-1
+      juntarFlores(cantF)
+      derecha
+      repetir ancho
+        mover
+      ancho:=ancho-1
+      juntarFlores(cantF)
+      repetir 3 
+        derecha
+  fin
+  proceso escaleraDerecha2(ES ancho:numero; ES alto: numero; ES cantF:numero)
+  comenzar
+    repetir 4
+      repetir ancho
+        mover
+      ancho:=ancho+1
+      juntaFlores(cantF)
+      derecha
+      repetir alto
+        mover
+      alto:=alto+1
+      repetir 3 
+        derecha
+      juntarFlores(cantF)
+    Informar(cantF)
+  fin
+  proceso escaleraIzquierda(ES ancho:numero ;ES alto: numero;ES cantP:numero)
+  comenzar
+    repetir 4
+      repetir alto
+        mover
+      alto:=alto-1
+      juntarPapeles(cantP)
+      repetir 3 
+        derecha
+      repetir ancho
+        mover
+      ancho:=ancho-1
+      juntarPapeles(cantP)
+      derecha
+    mover
+    repetir 3
+      derecha
+    mover
+  fin
+  proceso escaleraIzquierda2(ES ancho:numero;ES alto:numero ;ES cantP:numero )
+  comenzar
+    repetir 2
+      derecha
+    mover
+    repetir 4
+      repetir ancho
+        mover
+      ancho:=ancho+1
+      juntarPapeles(cantP)
+      repetir 3
+        derecha
+      repetir alto
+        mover
+      alto:=alto+1
+      juntarPapeles(cantP)
+      derecha
+    Informar(cantP) 
+  fin
+areas
+  area1: AreaPC(1,1,100,100)
+robots 
+  robot tipo1
+  variables
+    alto:numero
+    ancho:numero
+    id:numero
+    cantF:numero
+  comenzar 
+    alto:=4
+    ancho:=4
+    cantF:=0
+    RecibirMensaje(id,r3)
+    escaleraDerecha(alto,ancho,cantF)
+    BloquearEsquina(17,16)
+    repetir 3
+      derecha
+    mover
+    derecha
+    Enviarmensaje(id,r3)
+    repetir 2
+      derecha
+    mover
+    LiberarEsquina(17,16)
+    escaleraDerecha2(alto,ancho,cantF)
+  fin
+  robot tipo2
+  variables
+    ancho:numero
+    alto:numero
+    id:numero
+    cantP:numero
+  comenzar 
+    ancho:=4
+    alto:=4
+    cantP:=0
+    RecibirMensaje(id,r3)
+    escaleraIzquierda(ancho,alto,cantP)
+    BloquearEsquina(17,16)
+    derecha
+    mover
+    repetir 3 
+      derecha
+    mover
+    EnviarMensaje(id,r3)
+    derecha
+    mover
+    LiberarEsquina(17,16)
+    escaleraIzquierda2(ancho,alto,cantP)
+  fin
+  robot tipo3
+  variables
+    id1:numero
+    id2:numero
+  comenzar 
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    RecibirMensaje(id1,*)
+    RecibirMensaje(id2,*)
+    Informar(id1)
+  fin
+variables
+  r1:tipo1
+  r2:tipo2
+  r3:tipo3
+comenzar
+  AsignarArea(r1,area1)
+  AsignarArea(r2,area1)
+  AsignarArea(r3,area1)
+  Iniciar(r1,1,1)
+  Iniciar(r2,31,1)
+  Iniciar(r3,15,1)
+fin
