@@ -1,0 +1,83 @@
+programa ej1
+areas
+  area1: AreaPC(1,1,5,10)
+  area2:AreaPC(6,1,10,9)
+  area1a:AreaP(6,10,6,10)
+  area2a:AreaP(7,10,7,10)
+  area1b:AreaP(8,10,8,10)
+  area2b:AreaP(9,10,9,10)
+  area10:AreaPC(10,10,10,10)
+robots
+  robot tipo1
+  variables
+    av:numero
+    ca:numero
+    avO:numero
+    caO:numero
+  comenzar
+    avO:=PosAv
+    caO:=PosCa
+    repetir 5
+      Random(av,1,5)
+      Random(ca,1,10)
+      BloquearEsquina(av,ca)
+      Pos(av,ca)
+      mientras HayFlorEnLaEsquina
+        tomarFlor
+      Pos(avO,caO)
+      LiberarEsquina(av,ca)
+    BloquearEsquina(10,10)
+    Pos(10,10)
+    mientras HayFlorEnLaBolsa
+      depositarFlor
+    Pos(avO,caO)
+    LiberarEsquina(10,10)
+  fin
+  robot tipo2
+  variables
+    av:numero
+    ca:numero
+    avO:numero
+    caO:numero
+  comenzar 
+    avO:=PosAv
+    caO:=PosCa
+    repetir 3
+      Random(av,6,10)
+      Random(ca,1,9)
+      BloquearEsquina(av,ca)
+      Pos(av,ca)
+      mientras HayPapelEnLaEsquina
+        tomarPapel
+      Pos(avO,caO)
+      LiberarEsquina(av,ca)
+    BloquearEsquina(10,10)
+    Pos(10,10)
+    mientras HayPapelEnLaBolsa
+      depositarPapel
+    Pos(avO,caO)
+    LiberarEsquina(10,10)
+  fin
+variables
+  r1:tipo1
+  r2:tipo1
+  r3:tipo2
+  r4:tipo2
+comenzar
+  AsignarArea(r1,area1)
+  AsignarArea(r2,area1)
+  AsignarArea(r3,area2)
+  AsignarArea(r4,area2)
+  AsignarArea(r1,area1a)
+  AsignarArea(r2,area2a)
+  AsignarArea(r3,area1b)
+  AsignarArea(r4,area2b)
+  AsignarArea(r1,area10)
+  AsignarArea(r2,area10)
+  AsignarArea(r3,area10)
+  AsignarArea(r4,area10)
+  Iniciar(r1,6,10)
+  Iniciar(r2,7,10)
+  Iniciar(r3,8,10)
+  Iniciar(r4,9,10)
+fin
