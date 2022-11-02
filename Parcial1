@@ -1,0 +1,79 @@
+programa parcia1
+procesos
+  proceso juntarPapeles
+  variables
+    cant:numero
+  comenzar
+    cant:=0
+    mientras (HayPapelEnLaEsquina) & (cant<=10)
+      tomarPapel
+      cant:=cant+1
+  fin
+  proceso dejarPapeles
+  comenzar
+    mientras HayPapelEnLaBolsa
+      depositarPapel
+  fin
+areas
+  area1:AreaP(1,1,1,1)
+  area2:AreaP(2,2,2,2)
+  areaA:AreaPC(5,5,5,5)
+  areaB:AreaPC(6,6,6,6)
+robots
+  robot tipo1
+  variables
+    av:numero
+    ca:numero
+  comenzar
+    av:=PosAv
+    ca:=PosCa
+    BloquearEsquina(5,5)
+    Pos(5,5)
+    mientras HayPapelEnLaEsquina
+      juntarPapeles
+      BloquearEsquina(6,6)
+      Pos(6,6)
+      LiberarEsquina(5,5)
+      dejarPapeles
+      Pos(av,ca)
+      LiberarEsquina(6,6)
+      BloquearEsquina(5,5)
+      Pos(5,5)
+    Pos(av,ca)
+    LiberarEsquina(5,5)
+  fin
+  robot tipo2
+  variables
+    av:numero
+    ca:numero
+  comenzar
+    av:=PosAv
+    ca:=PosCa
+    BloquearEsquina(5,5)
+    Pos(5,5)
+    mientras HayPapelEnLaEsquina
+      juntarPapeles
+      BloquearEsquina(6,6)
+      Pos(6,6)
+      LiberarEsquina(5,5)
+      dejarPapeles
+      Pos(av,ca)
+      LiberarEsquina(6,6)
+      BloquearEsquina(5,5)
+      Pos(5,5)
+    Pos(av,ca)
+    LiberarEsquina(5,5)
+  fin
+variables
+  r1:tipo1
+  r2:tipo2
+comenzar
+  AsignarArea(r1,area1)
+  AsignarArea(r2,area2)
+  AsignarArea(r1,areaA)
+  AsignarArea(r1,areaB)
+  AsignarArea(r2,areaA)
+  AsignarArea(r2,areaB)
+  Iniciar(r1,1,1) 
+  Iniciar(r2,2,2)
+fin
