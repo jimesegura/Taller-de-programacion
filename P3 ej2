@@ -1,0 +1,86 @@
+programa ej2 {PREGUNTAR PORQUE SE CHOCAN NO ENTIENDO}
+areas
+  area1:AreaP(5,1,5,100)
+  area2:AreaP(10,1,10,100)
+  area3:AreaP(11,1,11,1)
+  area4:AreaP(12,1,12,1)
+  area5:AreaPC(50,50,50,50)
+robots
+  robot productores
+  variables
+    cantP:numero
+    ca:numero
+    av:numero
+  comenzar
+    cantP:=0
+    ca:=0
+    mientras (ca<100) 
+      mientras HayPapelEnLaEsquina &(cantP<5)
+        tomarPapel
+        cantP:=cantP+1
+      si cantP = 5
+        av:=PosAv
+        ca:=PosCa
+        BloquearEsquina(50,50)
+        Pos(50,50)
+        mientras HayPapelEnLaBolsa
+          depositarPapel
+        Pos(av,ca)
+        LiberarEsquina(50,50)
+        cantP:=0
+      mover
+  fin
+  robot consumidores
+  variables
+    ran:numero
+    cantP:numero
+    temp:numero
+    av:numero
+    ca:numero
+  comenzar
+    cantP:=0
+    temp:=0
+    mientras temp<8
+      Random(ran,2,5)
+      av:=PosAv
+      ca:=PosCa
+      BloquearEsquina(50,50)
+      Pos(50,50)
+      si HayPapelEnLaEsquina
+        mientras HayPapelEnLaEsquina
+          tomarPapel
+          cantP:=cantP+1
+        mientras HayPapelEnLaBolsa
+          depositarPapel
+        si cantP>=ran
+          repetir ran
+            tomarPapel
+          temp:=0
+        sino
+          temp:=temp+1
+        Pos(av,ca)
+        LiberarEsquina(50,50)      
+      si ~(HayPapelEnLaEsquina)
+        Pos(av,ca)
+        LiberarEsquina(50,50)
+        temp:=temp+1
+  fin
+variables
+  r1:productores
+  r2:productores
+  r3:consumidores
+  r4:consumidores
+comenzar
+  AsignarArea(r1,area1)
+  AsignarArea(r2,area2)
+  AsignarArea(r3,area3)
+  AsignarArea(r4,area4)
+  AsignarArea(r1,area5)
+  AsignarArea(r2,area5)
+  AsignarArea(r3,area5)
+  AsignarArea(r4,area5)
+  Iniciar(r1,5,1)
+  Iniciar(r2,10,1)
+  Iniciar(r3,11,1)
+  Iniciar(r4,12,1)
+fin
