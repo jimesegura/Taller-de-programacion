@@ -1,0 +1,70 @@
+programa parcial2
+areas
+  area1:AreaP(2,2,2,2)
+  area2:AreaP(3,3,3,3)
+  area3:AreaPC(50,50,50,50)
+  area4:AreaPC(5,1,5,100)
+robots
+  robot tipo1
+  variables
+    cantP:numero
+    av:numero
+    ca:numero
+    cantF:numero
+  comenzar
+    cantP:=0
+    BloquearEsquina(50,50)
+    av:=PosAv
+    ca:=PosCa
+    Pos(50,50)
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      cantP:=cantP+1
+    Pos(av,ca)
+    LiberarEsquina(50,50)
+    EnviarMensaje(cantP,r2)
+    RecibirMensaje(cantF,r2)
+    si cantP>cantF
+      Informar(cantP)
+      Pos(5,1)
+      repetir cantP
+        mover
+  fin
+  robot tipo2
+  variables
+    cantF:numero
+    cantP:numero
+    av:numero
+    ca:numero
+  comenzar
+    cantF:=0
+    BloquearEsquina(50,50)
+    av:=PosAv
+    ca:=PosCa
+    Pos(50,50)
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      cantF:=cantF+1
+    Pos(av,ca)
+    LiberarEsquina(50,50)
+    EnviarMensaje(cantF,r1)
+    RecibirMensaje(cantP,r1)
+    si cantF>cantP
+      Informar(cantF)
+      Pos(5,1)
+      repetir cantF
+        mover
+  fin
+variables
+  r1:tipo1
+  r2:tipo2
+comenzar
+  AsignarArea(r1,area1)
+  AsignarArea(r1,area3)
+  AsignarArea(r1,area4)
+  AsignarArea(r2,area2)
+  AsignarArea(r2,area3)
+  AsignarArea(r2,area4)
+  Iniciar(r1,2,2)
+  Iniciar(r2,3,3)
+fin
