@@ -1,0 +1,89 @@
+programa parcial3
+areas
+  area1:AreaP(2,2,2,2)
+  area2:AreaP(3,3,3,3)
+  area3:AreaP(4,4,4,4)
+  area4:AreaP(5,5,5,5)
+  area5:AreaP(1,1,1,1)
+  area6:AreaPC(50,50,50,50)
+robots
+  robot tipo1
+  variables
+    id:numero
+    ir:boolean
+    av:numero
+    ca:numero
+  comenzar
+    RecibirMensaje(id,r5)
+    repetir 5
+      RecibirMensaje(ir,r5)
+      si ir=V
+        BloquearEsquina(50,50)
+        av:=PosAv
+        ca:=PosCa
+        Pos(50,50)
+        si HayFlorEnLaEsquina
+          tomarFlor
+        Pos(av,ca)
+        LiberarEsquina(50,50)
+  fin
+  robot tipo2
+  variables
+    ran:numero
+    ir:boolean
+    no:boolean
+  comenzar  
+    ir:=V
+    no:=F
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+    EnviarMensaje(4,r4)
+    repetir 5
+      Random(ran,1,4)
+      si ran=1
+        EnviarMensaje(ir,r1)
+        EnviarMensaje(no,r2)
+        EnviarMensaje(no,r3)
+        EnviarMensaje(no,r4)
+      sino 
+        si ran=2
+          EnviarMensaje(ir,r2)
+          EnviarMensaje(no,r1)
+          EnviarMensaje(no,r3)
+          EnviarMensaje(no,r4)
+        sino
+          si ran=3
+            EnviarMensaje(ir,r3)
+            EnviarMensaje(no,r1)
+            EnviarMensaje(no,r2)
+            EnviarMensaje(no,r4)
+          sino
+            si ran=4
+              EnviarMensaje(ir,r4) 
+              EnviarMensaje(no,r1)
+              EnviarMensaje(no,r2)
+              EnviarMensaje(no,r3)
+  fin
+variables
+  r1:tipo1
+  r2:tipo1
+  r3:tipo1
+  r4:tipo1
+  r5:tipo2
+comenzar
+  AsignarArea(r1,area1)
+  AsignarArea(r1,area6)
+  AsignarArea(r2,area2)
+  AsignarArea(r2,area6)
+  AsignarArea(r3,area3)
+  AsignarArea(r3,area6)
+  AsignarArea(r4,area4)
+  AsignarArea(r4,area6)
+  AsignarArea(r5,area5)
+  Iniciar(r1,2,2)
+  Iniciar(r2,3,3)
+  Iniciar(r3,4,4)
+  Iniciar(r4,5,5)
+  Iniciar(r5,1,1)
+fin
