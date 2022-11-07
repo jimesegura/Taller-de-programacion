@@ -1,0 +1,119 @@
+programa parcial3
+areas
+  area1:AreaP(10,10,10,10)
+  area2:AreaP(11,10,11,10)
+  area3:AreaP(12,10,12,10)
+  area4:AreaP(13,10,13,10)
+  area5:AreaP(1,1,1,1)
+  area6:AreaPC(45,48,62,69)
+robots
+  robot tipo1
+  variables
+    av:numero
+    ca:numero
+    ranA:numero
+    ranC:numero
+    id:numero
+    cant:numero
+  comenzar
+    RecibirMensaje(id,r5)
+    cant:=0
+    mientras cant<>5
+      av:=PosAv
+      ca:=PosCa
+      Random(ranA,45,62)
+      Random(ranC,48,69)
+      BloquearEsquina(ranA,ranC)
+      Pos(ranA,ranC)
+      si HayFlorEnLaEsquina
+        mientras HayFlorEnLaEsquina
+          tomarFlor
+          EnviarMensaje(id,r5)
+      sino
+        EnviarMensaje(0,r5)
+      si HayPapelEnLaEsquina
+        mientras HayPapelEnLaEsquina
+          tomarPapel
+          EnviarMensaje(id,r5)
+      sino
+        EnviarMensaje(0,r5)
+      cant:=cant+1
+      Pos(av,ca)
+      LiberarEsquina(ranA,ranC)
+    EnviarMensaje(0,r5)
+    EnviarMensaje(0,r5)
+  fin
+  robot tipo2
+  variables
+    id:numero
+    a:numero
+    b:numero
+    c:numero
+    d:numero
+    ganador:numero
+    cant:numero
+    p:numero
+  comenzar  
+    a:=0
+    b:=0
+    c:=0
+    d:=0
+    cant:=0
+    p:=0
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+    EnviarMensaje(4,r4)
+    mientras p<>4
+      repetir 10
+        RecibirMensaje(id,*)
+        si id<>0
+          si id=1
+            a:=a+1
+          sino
+            si id=2
+              b:=b+1
+            sino
+              si id=3
+                c:=c+1
+              sino
+                si id=4
+                  d:=d+1
+      RecibirMensaje(cant,*)
+      p:=p+1
+    si p=4
+      si (a>b)&(a>c)&(a>d)  
+        ganador:=1
+      sino 
+        si (b>a)&(b>c)&(b>d)
+          ganador:=2
+        sino
+          si (c>a)&(c>b)&(c>d)
+            ganador:=3
+          sino
+            si (d>a)&(d>b)&(d>c)
+              ganador:=4
+    Informar(ganador)
+  fin
+variables
+  r1:tipo1
+  r2:tipo1
+  r3:tipo1
+  r4:tipo1
+  r5:tipo2
+comenzar
+  AsignarArea(r1,area1)
+  AsignarArea(r1,area6)
+  AsignarArea(r2,area2)
+  AsignarArea(r2,area6)
+  AsignarArea(r3,area3)
+  AsignarArea(r3,area6)
+  AsignarArea(r4,area4)
+  AsignarArea(r4,area6)
+  AsignarArea(r5,area5)
+  Iniciar(r1,10,10)
+  Iniciar(r2,11,10)
+  Iniciar(r3,12,10)
+  Iniciar(r4,13,10)
+  Iniciar(r5,1,1)
+fin
