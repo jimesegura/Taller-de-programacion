@@ -1,0 +1,163 @@
+programa parcial
+procesos
+  proceso juntarFyP (ES cant:numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      cant:=cant+1
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      cant:=cant+1
+  fin
+  proceso recorrido1(E av:numero; E ca:numero; E avO:numero; E caO:numero)
+  variables
+    cant:numero
+    mm:numero
+  comenzar
+    repetir 4
+      juntarFyP(cant)
+      ca:=ca+1
+      BloquearEsquina(av,ca)
+      mover
+      juntarFyP(cant)
+      mover
+      LiberarEsquina(av,ca)
+      ca:=PosCa
+    derecha
+    repetir 2
+      mover
+      juntarFyP(cant)
+    derecha
+    repetir 4
+      juntarFyP(cant)
+      ca:=ca-1
+      BloquearEsquina(av,ca)
+      mover
+      juntarFyP(cant)
+      mover
+      LiberarEsquina(av,ca)
+      ca:=PosCa
+    derecha
+    repetir 2
+      mover
+      juntarFyP(cant)
+    derecha
+    Pos(avO,caO)
+    EnviarMensaje(cant,rj)
+  fin
+  proceso recorrido2(E av:numero; E ca:numero; E avO:numero; E caO:numero)
+  variables
+    cant:numero
+  comenzar
+    derecha
+    repetir 4
+      juntarFyP(cant)
+      av:=av+1
+      BloquearEsquina(av,ca)
+      mover
+      juntarFyP(cant)
+      mover
+      LiberarEsquina(av,ca)
+      av:=PosAv
+    repetir 3
+      derecha
+    repetir 2
+      mover
+      juntarFyP(cant)
+    repetir 2
+      derecha
+    derecha
+    repetir 4
+      juntarFyP(cant)
+      av:=av-1
+      BloquearEsquina(av,ca)
+      mover
+      juntarFyP(cant)
+      mover
+      LiberarEsquina(av,ca)
+      av:=PosAv
+    repetir 3
+      derecha
+    repetir 2
+      mover
+      juntarFyP(cant)
+    repetir 2
+      derecha
+    Pos(avO,caO)
+    EnviarMensaje(cant,rj)
+  fin
+areas
+  area1:AreaPC(1,1,9,9)
+  areaj:AreaP(20,15,20,15)
+  areaa:AreaP(20,1,20,1)
+  areab:AreaP(20,2,20,2)
+  areac:AreaP(20,4,20,4)
+  aread:AreaP(20,5,20,5)
+robots
+  robot tipo1
+  variables
+    av:numero
+    ca:numero
+    avO:numero
+    caO:numero
+  comenzar
+    si (PosCa=4)
+      avO:=PosAv
+      caO:=PosCa
+      av:=2
+      ca:=1
+      Pos(2,1)
+      recorrido1(av,ca,avO,caO)
+    si PosCa=5
+      avO:=PosAv
+      caO:=PosCa
+      av:=6
+      ca:=1
+      Pos(6,1)
+      recorrido1(av,ca,avO,caO)
+    si  PosCa=1
+      avO:=PosAv
+      caO:=PosCa
+      av:=1
+      ca:=2
+      Pos(1,2)
+      recorrido2(av,ca,avO,caO)
+    si PosCa=2
+      avO:=PosAv
+      caO:=PosCa
+      av:=1
+      ca:=6
+      Pos(1,6)
+      recorrido2(av,ca,avO,caO)
+  fin
+  robot tipo2
+  variables
+    cant:numero
+  comenzar
+    repetir 4
+      RecibirMensaje(cant,*)
+      cant:=cant+cant
+    Informar(cant)
+  fin
+variables
+  r1:tipo1
+  r2:tipo1
+  r3:tipo1
+  r4:tipo1
+  rj:tipo2
+comenzar
+  AsignarArea(r1,area1)
+  AsignarArea(r1,areaa)
+  AsignarArea(r2,area1)
+  AsignarArea(r2,areab)
+  AsignarArea(r3,area1)
+  AsignarArea(r3,areac)
+  AsignarArea(r4,area1)
+  AsignarArea(r4,aread)
+  AsignarArea(rj,areaj)
+  Iniciar(r1,20,1)
+  Iniciar(r2,20,2)
+  Iniciar(r3,20,4)
+  Iniciar(r4,20,5)
+  Iniciar(rj,20,15)
+fin
