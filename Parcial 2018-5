@@ -1,0 +1,142 @@
+programa parcial5
+procesos
+  proceso juntarFlor(ES cantF:numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      cantF:=cantF+1
+  fin
+  proceso juntarPapeles(ES cantP:numero)
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      cantP:=cantP+1    
+  fin
+  proceso recorrer
+  variables
+    cantF:numero
+    av:numero
+    ca:numero
+  comenzar
+    av:=PosAv
+    ca:=PosCa
+    cantF:=0
+    BloquearEsquina(av,ca)
+    juntarFlor(cantF)
+    mover
+    LiberarEsquina(av,ca)
+    repetir 2
+      repetir 9
+        juntarFlor(cantF)
+        mover
+      derecha
+    EnviarMensaje(cantF,rj)
+  fin
+  proceso recorrer2
+  variables
+    cantP:numero
+    av:numero
+    ca:numero
+  comenzar
+    cantP:=0
+    av:=PosAv
+    ca:=PosCa
+    repetir 2
+      derecha
+    BloquearEsquina(av,ca)
+    juntarPapeles(cantP)
+    mover
+    LiberarEsquina(av,ca)
+    repetir 2
+      repetir 9
+        juntarPapeles(cantP)
+        mover
+      derecha
+    EnviarMensaje(cantP,rj)
+  fin
+areas
+  area1:AreaPC(3,3,13,13)
+  area2:AreaPC(16,3,26,13)
+  areaj:AreaP(14,6,14,6)
+robots
+  robot tipo1
+  variables
+    id:numero
+    ok:boolean
+  comenzar
+    RecibirMensaje(id,rj)
+    recorrer
+    RecibirMensaje(ok,rj)
+    EnviarMensaje(id,rj)
+  fin
+  robot tipo2
+  variables
+    id:numero
+    ok:boolean
+  comenzar
+    RecibirMensaje(id,rj)
+    recorrer2
+    RecibirMensaje(ok,rj)
+    EnviarMensaje(id,rj)
+  fin
+  robot tipoj
+  variables
+    canTotal:numero
+    a:numero
+    b:numero
+    id:numero
+    ganador:numero
+    c:numero
+    d:numero
+    ok:boolean
+  comenzar
+    ok:=V
+    c:=0
+    a:=0
+    b:=0
+    d:=0
+    canTotal:=0
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+    EnviarMensaje(4,r4)
+    repetir 4
+      RecibirMensaje(canTotal,*)
+      c:=c+canTotal
+      d:=d+1
+      si d=4
+        EnviarMensaje(ok,r1)
+        EnviarMensaje(ok,r2)
+        EnviarMensaje(ok,r3)
+        EnviarMensaje(ok,r4)
+    Informar(c)
+    repetir 4
+      RecibirMensaje(id,*)
+      si (id=1) | (id=2)
+        a:=a+1
+        si (a=2)&(b<2)
+          Informar(1)
+      sino
+        si(id=3)|(id=4)
+          b:=b+1
+          si (b=2)&(a<2)
+            Informar(2)
+  fin
+variables
+  r1:tipo1
+  r2:tipo2
+  r3:tipo1
+  r4:tipo2
+  rj:tipoj
+comenzar
+  AsignarArea(r1,area1)
+  AsignarArea(r2,area1)
+  AsignarArea(r3,area2)
+  AsignarArea(r4,area2)
+  AsignarArea(rj,areaj)
+  Iniciar(r1,3,3)
+  Iniciar(r2,13,13)
+  Iniciar(r3,16,3)
+  Iniciar(r4,26,13)
+  Iniciar(rj,14,6)
+fin
