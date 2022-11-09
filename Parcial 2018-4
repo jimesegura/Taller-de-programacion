@@ -1,0 +1,197 @@
+programa parcial4
+procesos
+  proceso juntarFlores
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+  fin
+  proceso juntarFlor
+  comenzar
+    si HayFlorEnLaEsquina
+      tomarFlor
+  fin
+  proceso recorrido(E ancho:numero; E av:numero)
+  variables
+    a:numero
+    c:numero
+    a2:numero
+    c2:numero
+  comenzar
+    si PosAv=1
+      a:=5
+      c:=15
+      a2:=PosAv
+      c2:=PosCa
+      Pos(av,10)
+    sino 
+      a:=5
+      c:=40
+      a2:=PosAv
+      c2:=PosCa
+      Pos(av,30)
+    repetir 2
+      repetir ancho
+        juntarFlores
+        mover
+      derecha
+      repetir 15
+        juntarFlores
+        mover
+      derecha
+    Pos(a,c)
+    mientras HayFlorEnLaBolsa
+      depositarFlor
+    Pos(a2,c2)
+    
+  fin
+  proceso recorrido2(E ancho:numero; E av:numero)
+  variables
+    avO:numero
+    caO:numero
+    a1:numero
+    c1:numero
+    a2:numero
+    c2:numero
+    id:numero
+  comenzar
+    si PosAv=2
+      id:=2
+      a2:=PosAv
+      c2:=PosCa
+      avO:=av
+      caO:=10
+      a1:=5
+      c1:=15
+      Pos(a1,c1)
+    sino
+      id:=4
+      a2:=PosAv
+      c2:=PosCa
+      avO:=av
+      caO:=30
+      a1:=5
+      c1:=40
+      Pos(a1,c1)
+    repetir ancho
+      juntarFlor
+      Pos(avO,caO)
+      si HayFlorEnLaBolsa
+        depositarFlor
+      caO:=caO+1
+      Pos(a1,c1)
+    derecha
+    repetir 15
+      juntarFlor
+      Pos(avO,caO)
+      si HayFlorEnLaBolsa
+        depositarFlor
+      avO:=avO+1
+      Pos(a1,c1)
+    repetir ancho
+      juntarFlor
+      Pos(avO,caO)
+      si HayFlorEnLaBolsa
+        depositarFlor
+      caO:=caO - 1
+      Pos(a1,c1)
+    derecha
+    repetir 15
+      juntarFlor
+      Pos(avO,caO)
+      si HayFlorEnLaEsquina
+        depositarFlor
+      avO:=avO - 1
+      Pos(a1,c1)
+    Pos(a2,c2)
+    EnviarMensaje(id,rj)
+  fin
+areas
+  area1:AreaPC(1,10,100,25)
+  area2:AreaPC(1,30,100,45)
+  areaa:AreaP(1,1,1,1)
+  areab:AreaP(2,2,2,2)
+  areac:AreaP(3,3,3,3)
+  aread:AreaP(4,4,4,4)
+  areaj:AreaP(5,5,5,5)
+robots
+  robot tipo1
+  variables
+    id:numero
+    ancho:numero
+    av:numero
+  comenzar
+    RecibirMensaje(id,rj)
+    RecibirMensaje(ancho,rj)
+    RecibirMensaje(av,rj)
+    recorrido(ancho,av)
+    si id=1
+      EnviarMensaje(id,r2)
+    sino
+      EnviarMensaje(id,r4)
+  fin
+  robot tipo2
+  variables
+    id:numero
+    num:numero
+    ancho:numero
+    av:numero
+  comenzar
+    RecibirMensaje(id,rj)
+    RecibirMensaje(ancho,rj)
+    RecibirMensaje(av,rj)
+    si id=2
+      RecibirMensaje(num,r1)
+    sino
+      RecibirMensaje(num,r3)
+    recorrido2(ancho,av)
+  fin
+  robot tipoj
+  variables
+    A:numero
+    AV:numero
+    id:numero
+    ganador:numero
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+    EnviarMensaje(4,r4)
+    Random(A,1,5)
+    Random(AV,1,95)
+    EnviarMensaje(A,r1)
+    EnviarMensaje(AV,r1)
+    EnviarMensaje(A,r2)
+    EnviarMensaje(AV,r2)
+    EnviarMensaje(A,r3)
+    EnviarMensaje(AV,r3)
+    EnviarMensaje(A,r4)
+    EnviarMensaje(AV,r4)
+    RecibirMensaje(id,*)
+    si id=2
+      ganador:=1
+    si id=4
+      ganador:=2
+    Informar(ganador)
+  fin
+variables
+  r1:tipo1
+  r2:tipo2
+  r3:tipo1
+  r4:tipo2
+  rj:tipoj
+comenzar
+  AsignarArea(r1,area1)
+  AsignarArea(r1,areaa)
+  AsignarArea(r2,area1)
+  AsignarArea(r2,areab)
+  AsignarArea(r3,area2)
+  AsignarArea(r3,areac)
+  AsignarArea(r4,area2)
+  AsignarArea(r4,aread)
+  AsignarArea(rj,areaj)
+  Iniciar(r1,1,1)
+  Iniciar(r2,2,2)
+  Iniciar(r3,3,3)
+  Iniciar(r4,4,4)
+  Iniciar(rj,5,5)
+fin
