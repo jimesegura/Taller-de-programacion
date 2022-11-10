@@ -1,0 +1,88 @@
+programa ejeradicionales
+procesos
+  proceso juntarFlores
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+  fin
+  proceso dejarFlores
+  comenzar
+    mientras HayFlorEnLaBolsa
+      depositarFlor
+  fin  
+  proceso depositarEnEsquina(E avO:numero; E caO:numero)
+  comenzar
+    BloquearEsquina(35,50)
+    Pos(35,50)
+    dejarFlores
+    Pos(avO,caO)
+    LiberarEsquina(35,50)
+  fin
+areas
+  area1:AreaP(3,1,3,29)  
+  area2:AreaP(5,1,5,29)
+  area3:AreaP(7,1,7,29)
+  area4:AreaP(9,1,9,29)
+  areaj:AreaP(1,1,1,1)
+  area5:AreaPC(3,30,15,45)
+  area6:AreaPC(35,50,35,50)
+robots
+  robot tipo1
+  variables
+    id:numero
+    pasos:numero
+    avO:numero
+    caO:numero
+  comenzar
+    avO:=PosAv
+    caO:=PosCa
+    RecibirMensaje(id,rj)
+    mientras (PosCa<> 30)
+      Random(pasos,1,5)
+      repetir pasos
+        juntarFlores
+        si (PosCa<>30)
+          mover
+    depositarEnEsquina(avO,caO)
+    EnviarMensaje(id,rj)
+  fin
+  robot tipoj
+  variables
+    id:numero
+    ganador:numero
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+    EnviarMensaje(4,r4)
+    RecibirMensaje(id,*)
+    Informar(id)
+    repetir 3
+      RecibirMensaje(id,*)
+  fin
+variables
+  r1:tipo1
+  r2:tipo1
+  r3:tipo1
+  r4:tipo1
+  rj:tipoj
+comenzar
+  AsignarArea(r1,area1)
+  AsignarArea(r1,area5)
+  AsignarArea(r2,area2)
+  AsignarArea(r2,area5)
+  AsignarArea(r3,area3)
+  AsignarArea(r3,area5)
+  AsignarArea(r4,area4)
+  AsignarArea(r4,area5)
+  AsignarArea(rj,areaj)
+  AsignarArea(r1,area6)
+  AsignarArea(r2,area6)
+  AsignarArea(r3,area6)
+  AsignarArea(r4,area6)
+  Iniciar(r1,3,1)
+  Iniciar(r2,5,1)
+  Iniciar(r3,7,1)
+  Iniciar(r4,9,1)
+  Iniciar(rj,1,1)
+fin
